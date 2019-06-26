@@ -5,15 +5,14 @@
 #include <vector>
 #include "tipos.h"
 #include "objeto.h"
-
 using namespace std;
 
-// Valores constantes
 const TipoEntero ALTURA = 21;
 const TipoEntero ANCHO = 21;
 const TipoCaracter COLOR = '.';
 
-class Tierra {
+class Tierra 
+{
 private:
 	vector<vector<char>> plano;
 	vector<Objeto*> objetos;

@@ -6,18 +6,21 @@ using namespace std;
 
 enum class Opciones { Agregar = 1, Remover, Mostrar };
 
-void limpiar() {
+void limpiar() 
+{
 	cout << "\033[2J\033[0;0H";
 }
 
-void esperar() {
+void esperar() 
+{
 	char w;
 	do {
 		w = input<TipoCaracter>("Presione C y Enter para continuar...");
 	} while (toupper(w) != 'C');
 }
 
-void Menu::imprimirMenu() {
+void Menu::imprimirMenu() 
+{
 	limpiar();
 	cout << "MENU\n";
 	cout << string(4, '-') << "\n\n";
@@ -27,31 +30,28 @@ void Menu::imprimirMenu() {
 	cout << "0. Para Salir\n\n";
 }
 
-
-void Menu::agregarObjeto() {
-	auto    nombre = input<TipoString>("Ingrese Nombre : ");
+void Menu::agregarObjeto()
+{
+	auto nombre = input<TipoString>("Ingrese Nombre : ");
 	auto color = input<TipoCaracter>("Ingrese color (Un caracter): ");
-
+	
 	auto x = input<TipoEntero>("Ingrese posicion X : ");
-
-
 	while (x < 0 || x >= tierra.getAncho()) {
-		cout << "Posicion X Incorrecta, los limites son: 0, "
-			<< tierra.getAncho() - 1 << "\n";
+		cout << "Posicion X Incorrecta, los limites son: 0, " << tierra.getAncho() - 1 << "\n";
 		x = input<TipoEntero>("Ingrese posicion X : ");
 	}
 
-	TipoEntero y = input<TipoEntero>("Ingrese posicion Y : ");
-	while (y < 0 || y >= tierra.getAncho()) {
-		cout << "Posicion Y Incorrecta, los limites son: 0, "
-			<< tierra.getAltura() - 1 << "\n";
+	auto y = input<TipoEntero>("Ingrese posicion Y : ");
+	while (y < 0 || y >= tierra.getAltura()) {
+		cout << "Posicion Y Incorrecta, los limites son: 0, " << tierra.getAltura() - 1 << "\n";
 		y = input<TipoEntero>("Ingrese posicion Y : ");
 	}
 
 	tierra.adicionarObjeto(new Objeto(nombre, color, x, y));
 }
 
-void Menu::removerObjeto() {
+void Menu::removerObjeto() 
+{
 	auto nombre = input<TipoString>("Ingrese Nombre: ");
 
 	Objeto* obj = tierra.removerObjeto(nombre);
@@ -65,7 +65,8 @@ void Menu::removerObjeto() {
 	esperar();
 }
 
-void Menu::dibujarMapa() {
+void Menu::dibujarMapa() 
+{
 	limpiar();
 	tierra.actualizarTierra();
 	tierra.dibujarTierra();
@@ -75,7 +76,8 @@ void Menu::dibujarMapa() {
 	esperar();
 }
 
-void Menu::ejecutar() {
+void Menu::ejecutar() 
+{
 	do {
 		imprimirMenu();
 		cin >> opcion;
@@ -84,16 +86,17 @@ void Menu::ejecutar() {
 	cout << "Fin del programa...\n";
 }
 
-void Menu::seleccionarOpcion() {
+void Menu::seleccionarOpcion() 
+{
 	limpiar();
 	switch (Opciones(opcion)) {
-	case Opciones::Agregar:  // Agregar Objeto
+	case Opciones::Agregar:
 		agregarObjeto();
 		break;
-	case Opciones::Remover:  // Remover Objeto
+	case Opciones::Remover:
 		removerObjeto();
 		break;
-	case  Opciones::Mostrar: // Dibujando Tierra
+	case  Opciones::Mostrar:
 		dibujarMapa();
 		break;
 	}

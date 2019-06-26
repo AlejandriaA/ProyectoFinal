@@ -2,7 +2,6 @@
 #include <string>
 #include <iomanip>
 #include <algorithm>
-
 using namespace std;
 
 Tierra::Tierra() {
@@ -28,8 +27,7 @@ Objeto* Tierra::removerObjeto(string& nombre) {
 	if (objetos.size() == 0)
 		return nullptr;
 
-	auto iter = find_if(begin(objetos), end(objetos),
-		[&nombre](Objeto* obj) { return obj->getNombre() == nombre; });
+	auto iter = find_if(begin(objetos), end(objetos), [&nombre](Objeto* obj) { return obj->getNombre() == nombre; });
 	if (iter == end(objetos))
 		return nullptr;
 	// Eliminando objeto
